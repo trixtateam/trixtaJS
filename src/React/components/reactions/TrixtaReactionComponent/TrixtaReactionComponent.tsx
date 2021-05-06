@@ -4,11 +4,11 @@ import { isNullOrEmpty } from '../../../../utils';
 import {
   makeSelectHasTrixtaRoleAccess,
   makeSelectTrixtaReactionCommonForRole,
-  makeSelectTrixtaReactionResponseInstancesForRole,
+  makeSelectTrixtaReactionResponseInstancesForRole
 } from '../../../selectors';
 import { trixtaDebugger, TrixtaDebugType } from '../../../TrixtaDebugger';
-import { TrixtaState } from '../../../types';
 import { TrixtaReactionInstanceComponent } from '../TrixtaReactionInstanceComponent';
+import { TrixtaState } from './../../../types/common';
 import { TrixtaReactionComponentProps } from './types';
 
 function TrixtaReactionComponent({

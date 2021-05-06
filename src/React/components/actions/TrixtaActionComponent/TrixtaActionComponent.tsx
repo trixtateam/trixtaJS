@@ -7,10 +7,11 @@ import {
   makeSelectHasTrixtaRoleAccess,
   makeSelectIsTrixtaActionInProgress,
   makeSelectTrixtaActionCommonForRole,
-  makeSelectTrixtaActionResponseInstancesForRole,
+  makeSelectTrixtaActionResponseInstancesForRole
 } from '../../../selectors';
 import { trixtaDebugger, TrixtaDebugType } from '../../../TrixtaDebugger';
-import { TrixtaState } from '../../../types';
+import { DefaultUnknownType, TrixtaState } from '../../../types/common';
+import TrixtaReactJsonSchemaForm from '../../TrixtaFormComponent';
 import { TrixtaActionInstanceComponent } from '../TrixtaActionInstanceComponent';
 import { TrixtaActionComponentArgs } from '../types';
 import { TrixtaActionComponentProps } from './types';
@@ -25,7 +26,10 @@ function TrixtaActionComponent({
   hasRoleAccess,
   renderResponse = false,
   children,
+  onError,
+  onSuccess,
   debugMode = false,
+  initialData = undefined,
   ...rest
 }: TrixtaActionComponentProps & DispatchProps & ConnectProps) {
   trixtaDebugger({
@@ -38,6 +42,7 @@ function TrixtaActionComponent({
     roleName,
   });
   if (!hasRoleAccess) return null;
+
   const actionProps: TrixtaActionComponentArgs = {
     dispatchSubmitActionResponse,
     submit: dispatchSubmitActionResponse,
@@ -47,11 +52,43 @@ function TrixtaActionComponent({
     isInProgress,
     response: get(instances, '0.response', { success: false, error: false }),
   };
-  if (!renderResponse && React.isValidElement(children)) {
-    return React.cloneElement(children, { ...actionProps, ...rest });
-  }
-  if (!renderResponse && typeof children === 'function') {
-    return children({ ...actionProps, ...rest });
+
+  if (!renderResponse) {
+    if (React.isValidElement(children)) {
+      return React.cloneElement(children, { ...actionProps, ...rest });
+    }
+    if (typeof children === 'function') {
+      return children({ ...actionProps, ...rest });
+    }
+
+    if (!children && common) {
+      onSuccess &&
+        actionProps.response?.success &&
+        onSuccess(actionProps.response?.success);
+      onError &&
+        actionProps.response?.error &&
+        onError(actionProps.response?.error);
+      const formData =
+        initialData !== undefined
+          ? initialData
+          : common.form_data
+          ? common.form_data
+          : {};
+      const schema = common.request_schema ?? {};
+      const uiSchema = common.request_settings ?? {};
+
+      return (
+        <TrixtaReactJsonSchemaForm
+          idPrefix={`${roleName}-${actionName}`}
+          schema={schema}
+          formData={formData}
+          uiSchema={uiSchema}
+          onSubmit={({ formData }: { formData: DefaultUnknownType }) => {
+            dispatchSubmitActionResponse(formData);
+          }}
+        />
+      );
+    }
   }
 
   return instances.map((_, index) => (
@@ -94,7 +131,7 @@ function mapDispatchToProps(
   ownProps: TrixtaActionComponentProps,
 ) {
   return {
-    dispatchSubmitActionResponse: (formData?: Record<string, unknown>) =>
+    dispatchSubmitActionResponse: (formData: DefaultUnknownType) =>
       dispatch(
         submitTrixtaActionResponse({
           errorEvent: ownProps.errorEvent,

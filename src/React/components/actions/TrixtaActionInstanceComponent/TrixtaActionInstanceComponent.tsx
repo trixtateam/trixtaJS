@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { makesSelectTrixtaActionResponseInstance } from '../../../selectors';
+import {
+  makeSelectTrixtaActionCommonForRole,
+  makesSelectTrixtaActionResponseInstance,
+} from '../../../selectors';
 import {
   TrixtaDebugType,
   trixtaInstanceDebugger
 } from '../../../TrixtaDebugger';
-import { TrixtaState } from '../../../types';
+import { TrixtaState } from '../../../types/common';
 import { TrixtaActionInstanceComponentProps } from './types';
 
 function TrixtaActionInstanceComponent({
@@ -33,11 +36,13 @@ function TrixtaActionInstanceComponent({
 
 const makeMapStateToProps = () => {
   const getTrixtaActionResponseInstance = makesSelectTrixtaActionResponseInstance();
+  const getTrixtaCommonForRole = makeSelectTrixtaActionCommonForRole();
   const mapStateToProps = (
     state: { trixta: TrixtaState },
     props: TrixtaActionInstanceComponentProps,
   ) => {
     return {
+      common: getTrixtaCommonForRole(state, props),
       response: getTrixtaActionResponseInstance(state, props),
     };
   };

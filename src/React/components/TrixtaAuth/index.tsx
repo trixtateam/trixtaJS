@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { makeSelectHasTrixtaRoleAccessForRoles } from '../../selectors';
-import { TrixtaAuthProps, TrixtaState } from '../../types';
+import { TrixtaAuthProps, TrixtaState } from '../../types/common';
 
 const TrixtaAuth = ({
   children,

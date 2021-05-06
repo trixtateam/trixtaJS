@@ -4,9 +4,12 @@ import { isNullOrEmpty } from '../../../../utils';
 import { submitTrixtaReactionResponse } from '../../../reduxActions';
 import {
   makeSelectHasTrixtaRoleAccess,
-  makeSelectTrixtaReactionResponseInstancesForRole,
+  makeSelectTrixtaReactionResponseInstancesForRole
 } from '../../../selectors';
-import { DefaultUnknownType, TrixtaState } from '../../../types';
+import {
+  DefaultUnknownType,
+  TrixtaState
+} from './../../../types/common';
 import { RespondToReactionComponentProps } from './types';
 
 function RespondToReactionComponent<TInitialData = DefaultUnknownType>({

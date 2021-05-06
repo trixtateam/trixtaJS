@@ -1,13 +1,11 @@
 import {
+  DefaultUnknownType,
   TrixtaCommon,
   TrixtaDispatch,
-  TrixtaReactionBaseProps,
-} from '../../types';
-import {
-  DefaultUnknownType,
   TrixtaInstanceDetails,
   TrixtaInstanceResponse,
-} from './../../types';
+} from './../../types/common';
+import { TrixtaReactionBaseProps } from './../../types/reactions';
 export interface TrixtaReactionComponentArgs<
   TInitialData = DefaultUnknownType,
   TFormData = DefaultUnknownType,
