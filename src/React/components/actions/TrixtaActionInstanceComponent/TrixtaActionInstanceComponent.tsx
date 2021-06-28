@@ -50,10 +50,5 @@ const makeMapStateToProps = () => {
 
 type ConnectProps = ReturnType<ReturnType<typeof makeMapStateToProps>>;
 
-const connector = connect<
-  ConnectProps,
-  Record<string, unknown>,
-  TrixtaActionInstanceComponentProps,
-  { trixta: TrixtaState }
->(makeMapStateToProps);
+const connector = connect(makeMapStateToProps);
 export default connector(TrixtaActionInstanceComponent);

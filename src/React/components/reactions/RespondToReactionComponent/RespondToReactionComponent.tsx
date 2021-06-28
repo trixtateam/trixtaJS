@@ -83,10 +83,5 @@ const makeMapStateToProps = () => {
 
 type ConnectProps = ReturnType<ReturnType<typeof makeMapStateToProps>>;
 
-const connector = connect<
-  ConnectProps,
-  Record<string, unknown>,
-  RespondToReactionComponentProps,
-  { trixta: TrixtaState }
->(makeMapStateToProps);
+const connector = connect(makeMapStateToProps);
 export default connector(RespondToReactionComponent);

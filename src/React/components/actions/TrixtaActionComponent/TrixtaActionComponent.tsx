@@ -7,7 +7,7 @@ import {
   makeSelectHasTrixtaRoleAccess,
   makeSelectIsTrixtaActionInProgress,
   makeSelectTrixtaActionCommonForRole,
-  makeSelectTrixtaActionResponseInstancesForRole
+  makeSelectTrixtaActionResponseInstancesForRole,
 } from '../../../selectors';
 import { trixtaDebugger, TrixtaDebugType } from '../../../TrixtaDebugger';
 import { TrixtaState } from '../../../types';
@@ -115,10 +115,5 @@ function mapDispatchToProps(
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 type ConnectProps = ReturnType<ReturnType<typeof makeMapStateToProps>>;
 
-const connector = connect<
-  ConnectProps,
-  DispatchProps,
-  TrixtaActionComponentProps,
-  { trixta: TrixtaState }
->(makeMapStateToProps, mapDispatchToProps);
+const connector = connect(makeMapStateToProps, mapDispatchToProps);
 export default connector(TrixtaActionComponent);

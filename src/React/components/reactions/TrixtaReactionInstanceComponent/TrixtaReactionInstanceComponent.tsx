@@ -6,13 +6,13 @@ import { submitTrixtaReactionResponse } from '../../../reduxActions';
 import { makesSelectTrixtaReactionResponseInstance } from '../../../selectors';
 import {
   TrixtaDebugType,
-  trixtaInstanceDebugger
+  trixtaInstanceDebugger,
 } from '../../../TrixtaDebugger';
 import { TrixtaInstanceResponse, TrixtaState } from '../../../types';
 import { TrixtaReactionComponentArgs } from '../types';
 import {
   TrixtaReactionInstanceComponentDispatchProps,
-  TrixtaReactionInstanceComponentProps
+  TrixtaReactionInstanceComponentProps,
 } from './types';
 const TrixtaReactionInstanceComponent = ({
   dispatchSubmitReactionResponse,
@@ -100,12 +100,7 @@ function mapDispatchToProps(
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 type ConnectProps = ReturnType<ReturnType<typeof makeMapStateToProps>>;
 
-const connector = connect<
-  ConnectProps,
-  DispatchProps,
-  TrixtaReactionInstanceComponentProps,
-  { trixta: TrixtaState }
->(makeMapStateToProps, mapDispatchToProps);
+const connector = connect(makeMapStateToProps, mapDispatchToProps);
 
 export default connector(
   React.memo(
