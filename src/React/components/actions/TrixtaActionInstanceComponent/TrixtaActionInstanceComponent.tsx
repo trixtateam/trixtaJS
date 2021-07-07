@@ -6,7 +6,7 @@ import {
 } from '../../../selectors';
 import {
   TrixtaDebugType,
-  trixtaInstanceDebugger
+  trixtaInstanceDebugger,
 } from '../../../TrixtaDebugger';
 import { TrixtaState } from '../../../types/common';
 import { TrixtaActionInstanceComponentProps } from './types';
