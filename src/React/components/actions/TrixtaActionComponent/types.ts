@@ -13,14 +13,6 @@ export interface TrixtaActionComponentProps extends TrixtaActionBaseProps {
    */
   renderResponse?: boolean;
   /**
-   * This function will fire any time the response from Trixta successfully returns data and will be passed the data.
-   */
-  onSuccess?: (success: unknown) => void;
-  /**
-   * This function will fire if the response from Trixta encounters an error and will be passed the error.
-   */
-  onError?: (error: unknown) => void;
-  /**
    * Trixta action debugging options
    */
   debugOptions?: TrixtaActionDebugOptions;

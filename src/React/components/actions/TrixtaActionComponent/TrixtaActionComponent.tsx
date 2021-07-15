@@ -26,8 +26,6 @@ function TrixtaActionComponent({
   hasRoleAccess,
   renderResponse = false,
   children,
-  onError,
-  onSuccess,
   debugMode = false,
   initialData = undefined,
   ...rest
@@ -62,12 +60,6 @@ function TrixtaActionComponent({
     }
 
     if (!children && common) {
-      onSuccess &&
-        actionProps.response?.success &&
-        onSuccess(actionProps.response?.success);
-      onError &&
-        actionProps.response?.error &&
-        onError(actionProps.response?.error);
       const formData =
         initialData !== undefined
           ? initialData
