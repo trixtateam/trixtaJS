@@ -7,7 +7,7 @@ import {
   makeSelectHasTrixtaRoleAccess,
   makeSelectIsTrixtaActionInProgress,
   makeSelectTrixtaActionCommonForRole,
-  makeSelectTrixtaActionResponseInstancesForRole,
+  makeSelectTrixtaActionResponseInstancesForRole
 } from '../../../selectors';
 import { trixtaDebugger, TrixtaDebugType } from '../../../TrixtaDebugger';
 import { DefaultUnknownType, TrixtaState } from '../../../types/common';
@@ -73,6 +73,7 @@ function TrixtaActionComponent({
         <TrixtaReactJsonSchemaForm
           idPrefix={`${roleName}-${actionName}`}
           schema={schema}
+          formContext={{ ...rest }}
           formData={formData}
           uiSchema={uiSchema}
           onSubmit={({ formData }: { formData: DefaultUnknownType }) => {
