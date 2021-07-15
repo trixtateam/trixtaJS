@@ -16,6 +16,7 @@ function TrixtaFormComponent<TFormData = DefaultUnknownType>({
   schema,
   formData,
   uiSchema,
+  formContext,
 }: TrixtaReactJsonSchemaFormProps<TFormData>): JSX.Element {
   if (ThemedForm) {
     return (
@@ -23,6 +24,7 @@ function TrixtaFormComponent<TFormData = DefaultUnknownType>({
         idPrefix={idPrefix}
         onSubmit={onSubmit}
         schema={schema}
+        formContext={formContext}
         formData={formData}
         {...config.props}
         uiSchema={uiSchema}

@@ -7,7 +7,7 @@ import {
   makeSelectHasTrixtaRoleAccess,
   makeSelectIsTrixtaActionInProgress,
   makeSelectTrixtaActionCommonForRole,
-  makeSelectTrixtaActionResponseInstancesForRole
+  makeSelectTrixtaActionResponseInstancesForRole,
 } from '../../../selectors';
 import { trixtaDebugger, TrixtaDebugType } from '../../../TrixtaDebugger';
 import { DefaultUnknownType, TrixtaState } from '../../../types/common';
@@ -29,7 +29,10 @@ function TrixtaActionComponent({
   debugMode = false,
   initialData = undefined,
   ...rest
-}: TrixtaActionComponentProps & DispatchProps & ConnectProps) {
+}: TrixtaActionComponentProps &
+  DispatchProps &
+  ConnectProps &
+  Record<string, any>) {
   trixtaDebugger({
     type: TrixtaDebugType.Action,
     debugMode,
