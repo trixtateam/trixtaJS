@@ -4,7 +4,7 @@ import { isNullOrEmpty } from '../../../../utils';
 import {
   makeSelectHasTrixtaRoleAccess,
   makeSelectTrixtaReactionCommonForRole,
-  makeSelectTrixtaReactionResponseInstancesForRole,
+  makeSelectTrixtaReactionResponseInstancesForRole
 } from '../../../selectors';
 import { trixtaDebugger, TrixtaDebugType } from '../../../TrixtaDebugger';
 import { TrixtaReactionInstanceComponent } from '../TrixtaReactionInstanceComponent';
@@ -24,7 +24,7 @@ function TrixtaReactionComponent({
   debugMode = false,
   instances,
   ...rest
-}: ConnectProps & TrixtaReactionComponentProps) {
+}: ConnectProps & TrixtaReactionComponentProps & Record<string, any>) {
   trixtaDebugger({
     type: TrixtaDebugType.Reaction,
     debugMode,
